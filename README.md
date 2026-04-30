@@ -1,10 +1,9 @@
 # hardclaw
 Hardening of Dell Pro Max GB10 and deployment of Ollama NemoClaw and Nemotron 3 Super 120B
 
-================================================================================
+
   HARDCLAW — README
   Security-Hardened NemoClaw + Ollama on Dell Pro Max GB10
-================================================================================
 
 This package contains three scripts for deploying, verifying, and shutting down
 a security-hardened NemoClaw AI agent sandbox on Dell Pro Max GB10 hardware.
@@ -28,11 +27,11 @@ Environment variables (all optional):
   HARDCLAW_MODEL          Model to pull (default: nemotron-3-super:120b)
 
 
-================================================================================
+==================================
   INSTALL.SH — PHASE WALKTHROUGH
-================================================================================
+==================================
 
----- Phase 0: Preflight Checks ------------------------------------------------
+---- Phase 0: Preflight Checks ----
 
 WHAT: Validates the environment before making any changes.
 WHY:  Catching problems early (wrong OS, missing GPU, low disk) prevents a
@@ -48,7 +47,7 @@ Checks:
   - Existing ~/.nemoclaw backed up with a timestamp suffix if present
 
 
----- Phase 1: Host Hardening (UFW + avahi) ------------------------------------
+---- Phase 1: Host Hardening (UFW + avahi) -----
 
 WHAT: Configures the host firewall to a deny-all baseline and disables the
       mDNS broadcast daemon.
@@ -72,7 +71,7 @@ a process bound to 127.0.0.1. UFW rules restrict which source IPs can
 actually reach port 11434, so this is safe.
 
 
----- Phase 2: Docker + NVIDIA Runtime Hardening --------------------------------
+---- Phase 2: Docker + NVIDIA Runtime Hardening ----
 
 WHAT: Registers the NVIDIA container runtime with Docker and applies hardened
       daemon settings.
@@ -96,7 +95,7 @@ daemon.json settings written:
   log-opts: max-size 10m/5 files — Prevents disk exhaustion from unbounded logs
 
 
----- Phase 3: Ollama Install + Configure ---------------------------------------
+---- Phase 3: Ollama Install + Configure ----
 
 WHAT: Installs Ollama (if not present) and configures it as a systemd service
       bound to all interfaces.
@@ -113,7 +112,7 @@ Steps:
   - Waits up to 30 seconds for the HTTP endpoint to become ready
 
 
----- Phase 4: Model Pull (Nemotron 3 Super 120B) --------------------------------
+---- Phase 4: Model Pull (Nemotron 3 Super 120B) ----
 
 WHAT: Downloads the Nemotron 3 Super 120B model into Ollama's model store and
       pre-warms it into unified memory.
@@ -128,7 +127,7 @@ Steps:
   - printf '/bye\n' | ollama run ... — loads model into memory, immediately exits
 
 
----- Phase 5: NemoClaw Install -------------------------------------------------
+---- Phase 5: NemoClaw Install ----
 
 WHAT: Installs the NemoClaw CLI (v0.0.4) via NVIDIA's installer script.
 WHY:  NemoClaw is the orchestration layer that manages the sandbox lifecycle,
@@ -145,7 +144,7 @@ resolution strategies in order:
   5. filesystem search under /usr, /home, /opt, /snap (5-second cap)
 
 
----- Phase 6: Sandbox Onboard --------------------------------------------------
+---- Phase 6: Sandbox Onboard ----
 
 WHAT: Runs the nemoclaw onboard interactive wizard via expect automation to
       create the initial sandbox with local Ollama as the inference provider.
@@ -165,7 +164,7 @@ The dashboard token is captured from the wizard output and saved to
 ~/.nemoclaw/dashboard-token.txt (chmod 600).
 
 
----- Phase 7: Sandbox Policy Hardening -----------------------------------------
+---- Phase 7: Sandbox Policy Hardening ----
 
 WHAT: Overwrites openclaw-sandbox.yaml with a deny-all network policy, then
       destroys and recreates the sandbox so the policy takes effect.
@@ -197,7 +196,7 @@ Process policy:
   Runs as user/group "sandbox" (not root)
 
 
----- Phase 8: Reboot Survival (systemd) ----------------------------------------
+---- Phase 8: Reboot Survival (systemd) -----
 
 WHAT: Creates a systemd service (nemoclaw-sandbox.service) plus start/stop
       wrapper scripts so the full stack comes up automatically after a reboot.
@@ -222,7 +221,7 @@ The OpenShell Docker container gets restart=unless-stopped so Docker itself
 restarts it on boot; the systemd service handles the sandbox layer above that.
 
 
----- Phase 9: Quick Verification -----------------------------------------------
+---- Phase 9: Quick Verification ----
 
 WHAT: Runs five fast checks to confirm the install succeeded.
 WHY:  Provides immediate feedback without the full verify.sh depth, so the
@@ -232,15 +231,15 @@ Checks: Docker NVIDIA runtime, Ollama responding, model present,
         UFW active, nemoclaw-sandbox.service enabled.
 
 
----- Phase 10: Summary ---------------------------------------------------------
+---- Phase 10: Summary ----
 
 WHAT: Prints the dashboard URL, SSH tunnel command, and daily operation
       commands. Saves the same summary to ~/.nemoclaw/install-summary.txt.
 
 
-================================================================================
+====================================
   VERIFY.SH — LAYER-BY-LAYER CHECKS
-================================================================================
+====================================
 
 Run after install or after any reboot to confirm the full stack is healthy.
 Exit code 1 if any check fails; 0 if all pass (warnings are non-fatal).
@@ -249,28 +248,28 @@ Usage:
   bash verify.sh
   bash verify.sh --sandbox-name my-assistant
 
----- Layer 1: Host Baseline ---------------------------------------------------
+---- Layer 1: Host Baseline ----
 
 WHAT: Verifies UFW is active, the dashboard port is blocked, Docker→Ollama
       rules are present, and avahi-daemon is disabled.
 WHY:  These are the foundational host-level protections. If UFW is off, all
       other security controls can be bypassed from the network.
 
----- Layer 2: Docker + NVIDIA Runtime -----------------------------------------
+---- Layer 2: Docker + NVIDIA Runtime ----
 
 WHAT: Confirms Docker is running, NVIDIA runtime is registered, a container
       can launch with --runtime=nvidia, and daemon.json has the hardened flags.
 WHY:  If the NVIDIA runtime is not registered, OpenShell (and by extension the
       sandbox) cannot access GPU resources.
 
----- Layer 3: Ollama -----------------------------------------------------------
+---- Layer 3: Ollama ----
 
 WHAT: Checks that the ollama service is running and enabled, the HTTP endpoint
       responds, the model is present, and OLLAMA_HOST=0.0.0.0 is configured.
 WHY:  All inference calls from the sandbox route through here. A misconfigured
       binding means the sandbox gets connection-refused errors.
 
----- Layer 4: NemoClaw Sandbox -------------------------------------------------
+---- Layer 4: NemoClaw Sandbox ----
 
 WHAT: Confirms nemoclaw CLI is in PATH, the named sandbox is running, the
       policy file exists, and no dangerous endpoints remain in it.
@@ -278,7 +277,7 @@ WHAT: Confirms nemoclaw CLI is in PATH, the named sandbox is running, the
 WHY:  The sandbox is the innermost isolation layer. If it is not running or its
       network policy is too permissive, the agent can reach the internet.
 
----- Layer 5: In-Sandbox Isolation Checks --------------------------------------
+---- Layer 5: In-Sandbox Isolation Checks ----
 
 WHAT: Executes two tests inside the running sandbox:
   1. Inference test: curl https://inference.local/v1/models must return the
@@ -288,16 +287,16 @@ WHAT: Executes two tests inside the running sandbox:
 WHY:  These are the ground-truth checks. Everything above can pass and the
       sandbox can still be misconfigured. This layer tests actual behavior.
 
----- Dashboard -----------------------------------------------------------------
+---- Dashboard ----
 
 WHAT: Reads the saved token and checks that the dashboard port responds locally.
 WHY:  Confirms the UI is available for SSH-tunnel access and reminds you of
       the URL.
 
 
-================================================================================
+===============================
   SHUTDOWN.SH — CLEAN TEARDOWN
-================================================================================
+===============================
 
 Stops the stack in reverse dependency order. State is preserved — run
 'sudo systemctl start nemoclaw-sandbox' or rerun install.sh to bring
@@ -308,14 +307,14 @@ Usage:
   bash shutdown.sh --keep-ollama  # leave Ollama running (model stays in memory)
   bash shutdown.sh --sandbox-name NAME
 
----- Step 1: Stop Auxiliary NemoClaw Services ----------------------------------
+---- Step 1: Stop Auxiliary NemoClaw Services ----
 
 WHAT: Calls 'nemoclaw stop' to shut down any optional services (Telegram bridge,
       ngrok/cloudflared tunnel).
 WHY:  These must be stopped before the gateway container is torn down, or they
       will lose their network path and may leave stale processes.
 
----- Step 2: Stop OpenShell Cluster Container ----------------------------------
+---- Step 2: Stop OpenShell Cluster Container ----
 
 WHAT: Runs 'docker stop --time 30 openshell-cluster-nemoclaw'.
 WHY:  'docker stop' (not 'docker rm') preserves the container state and its
@@ -323,7 +322,7 @@ WHY:  'docker stop' (not 'docker rm') preserves the container state and its
       cluster inside flush any in-flight writes before the container exits.
       Using 'docker stop' instead of 'docker kill' avoids data corruption.
 
----- Step 3: Stop Ollama -------------------------------------------------------
+---- Step 3: Stop Ollama ----
 
 WHAT: Stops the ollama systemd service, freeing ~87 GB of unified memory.
 WHY:  The GB10 has 128 GB total unified memory. Releasing the model frees it for
@@ -331,9 +330,9 @@ WHY:  The GB10 has 128 GB total unified memory. Releasing the model frees it for
       to remain available while the NemoClaw stack is down (e.g., for testing).
 
 
-================================================================================
+====================
   SECURITY NOTES
-================================================================================
+====================
 
 - Never expose port 18789 (dashboard) directly to the network. Always use an
   SSH tunnel: ssh -L 18789:127.0.0.1:18789 user@<gb10-ip>
@@ -352,4 +351,4 @@ WHY:  The GB10 has 128 GB total unified memory. Releasing the model frees it for
   to confirm the deny-all network policy is actually enforced.
 
 
-================================================================================
+===================
