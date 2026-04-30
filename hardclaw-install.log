@@ -1,0 +1,1214 @@
+
+=== hardclaw install started at Wed Apr  8 11:36:13 PM IST 2026 ===
+  SANDBOX_NAME=my-assistant
+  NEMOCLAW_TAG=v0.0.4
+  MODEL=nemotron-3-super:120b
+
+[1mHardclaw Installer — Security-Hardened NemoClaw on Dell Pro Max GB10[0m
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 0 — Preflight checks
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m OS: Ubuntu 24.04
+  [0;32m✓[0m GPU: NVIDIA GB10
+  [0;32m✓[0m Docker: 29.2.1
+[1;34m[hardclaw][0m This script requires sudo access. You may be prompted for your password.
+  [0;32m✓[0m sudo: available
+  [0;32m✓[0m Memory: 118 GB available
+  [0;32m✓[0m Disk: 3421 GB free
+  [1;33m![0m Backing up existing ~/.nemoclaw to /home/democenter/.nemoclaw.bak.20260408_233621
+[1;34m[hardclaw][0m Estimated total time: 15–30 minutes (dominated by nemotron-3-super:120b download)
+[1;34m[hardclaw][0m Log file: /home/democenter/projects/hardclaw/hardclaw-install.log
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 1 — Host hardening
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m UFW installed
+[1;34m[hardclaw][0m Detected LAN subnet: 192.168.68.0/24
+  [0;32m✓[0m UFW enabled with deny-all baseline
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    192.168.68.0/24            # SSH from LAN
+18789                      DENY IN     Anywhere                   # Block OpenShell dashboard from network
+11434/tcp                  ALLOW IN    172.17.0.0/16              # Docker bridge to Ollama
+11434/tcp                  ALLOW IN    172.18.0.0/16              # OpenShell cluster to Ollama
+11434/tcp                  ALLOW IN    10.42.0.0/16               # k3s pod network to Ollama
+18789 (v6)                 DENY IN     Anywhere (v6)              # Block OpenShell dashboard from network
+  [0;32m✓[0m avahi-daemon disabled
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 2 — Docker + NVIDIA runtime
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;34m[hardclaw][0m Configuring NVIDIA container runtime...
+  [0;32m✓[0m NVIDIA runtime configured
+[1;34m[hardclaw][0m Hardening Docker daemon.json...
+  [0;32m✓[0m daemon.json hardened
+[1;34m[hardclaw][0m Restarting Docker...
+[1;34m[hardclaw][0m Verifying NVIDIA runtime (docker run with --gpus all)...
+  [0;31m✗ ERROR:[0m NVIDIA runtime verification failed. Check 'docker info' and 'nvidia-smi'.
+
+=== hardclaw install started at Wed Apr  8 11:38:59 PM IST 2026 ===
+  SANDBOX_NAME=my-assistant
+  NEMOCLAW_TAG=v0.0.4
+  MODEL=nemotron-3-super:120b
+
+[1mHardclaw Installer — Security-Hardened NemoClaw on Dell Pro Max GB10[0m
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 0 — Preflight checks
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m OS: Ubuntu 24.04
+  [0;32m✓[0m GPU: NVIDIA GB10
+  [0;32m✓[0m Docker: 29.2.1
+  [0;32m✓[0m sudo: available
+  [0;32m✓[0m Memory: 118 GB available
+  [0;32m✓[0m Disk: 3421 GB free
+  [1;33m![0m Backing up existing ~/.nemoclaw to /home/democenter/.nemoclaw.bak.20260408_233859
+[1;34m[hardclaw][0m Estimated total time: 15–30 minutes (dominated by nemotron-3-super:120b download)
+[1;34m[hardclaw][0m Log file: /home/democenter/projects/hardclaw/hardclaw-install.log
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 1 — Host hardening
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m UFW installed
+[1;34m[hardclaw][0m Detected LAN subnet: 192.168.68.0/24
+  [0;32m✓[0m UFW enabled with deny-all baseline
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    192.168.68.0/24            # SSH from LAN
+18789                      DENY IN     Anywhere                   # Block OpenShell dashboard from network
+11434/tcp                  ALLOW IN    172.17.0.0/16              # Docker bridge to Ollama
+11434/tcp                  ALLOW IN    172.18.0.0/16              # OpenShell cluster to Ollama
+11434/tcp                  ALLOW IN    10.42.0.0/16               # k3s pod network to Ollama
+18789 (v6)                 DENY IN     Anywhere (v6)              # Block OpenShell dashboard from network
+  [0;32m✓[0m avahi-daemon already inactive
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 2 — Docker + NVIDIA runtime
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;34m[hardclaw][0m Configuring NVIDIA container runtime...
+  [0;32m✓[0m NVIDIA runtime configured
+[1;34m[hardclaw][0m Hardening Docker daemon.json...
+  [0;32m✓[0m daemon.json hardened
+[1;34m[hardclaw][0m Restarting Docker...
+[1;34m[hardclaw][0m Verifying NVIDIA runtime via docker info...
+  [0;32m✓[0m NVIDIA runtime registered:  Default Runtime: nvidia
+[1;34m[hardclaw][0m Smoke-testing container launch with NVIDIA runtime...
+  [0;32m✓[0m Container launched successfully with NVIDIA runtime
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 3 — Ollama
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;34m[hardclaw][0m Installing Ollama...
+  [0;32m✓[0m Ollama installed
+[1;34m[hardclaw][0m Configuring Ollama to bind 0.0.0.0 (required for Docker bridge access)...
+  [0;32m✓[0m Ollama override.conf written
+[1;34m[hardclaw][0m Waiting for Ollama to start...
+  [0;32m✓[0m Ollama is running at http://localhost:11434
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 4 — Model pull (nemotron-3-super:120b)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;34m[hardclaw][0m Pulling nemotron-3-super:120b (~87 GB). This will take 15–30 minutes...
+[1;34m[hardclaw][0m You can safely leave this running. Progress is shown below.
+  [0;32m✓[0m Model pull complete
+[1;34m[hardclaw][0m Pre-warming model into memory (type /bye to exit if it prompts)...
+  [0;32m✓[0m Model pre-warmed
+  [0;32m✓[0m Model verified: nemotron-3-super:120b    95acc78b3ffd    86 GB    About a minute ago    
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 5 — NemoClaw install (tag: v0.0.4)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;34m[hardclaw][0m Installing NemoClaw v0.0.4...
+  [0;31m✗ ERROR:[0m nemoclaw not found in PATH after install. Check the installer output above.
+
+=== hardclaw install started at Thu Apr  9 08:28:14 AM IST 2026 ===
+  SANDBOX_NAME=my-assistant
+  NEMOCLAW_TAG=v0.0.4
+  MODEL=nemotron-3-super:120b
+
+[1mHardclaw Installer — Security-Hardened NemoClaw on Dell Pro Max GB10[0m
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 0 — Preflight checks
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m OS: Ubuntu 24.04
+  [0;32m✓[0m GPU: NVIDIA GB10
+  [0;32m✓[0m Docker: 29.2.1
+[1;34m[hardclaw][0m This script requires sudo access. You may be prompted for your password.
+  [0;32m✓[0m sudo: available
+  [0;32m✓[0m Memory: 117 GB available
+  [0;32m✓[0m Disk: 3331 GB free
+  [1;33m![0m Backing up existing ~/.nemoclaw to /home/democenter/.nemoclaw.bak.20260409_082821
+[1;34m[hardclaw][0m Estimated total time: 15–30 minutes (dominated by nemotron-3-super:120b download)
+[1;34m[hardclaw][0m Log file: /home/democenter/projects/hardclaw/hardclaw-install.log
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 1 — Host hardening
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m UFW installed
+[1;34m[hardclaw][0m Detected LAN subnet: 192.168.68.0/24
+  [0;32m✓[0m UFW enabled with deny-all baseline
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    192.168.68.0/24            # SSH from LAN
+18789                      DENY IN     Anywhere                   # Block OpenShell dashboard from network
+11434/tcp                  ALLOW IN    172.17.0.0/16              # Docker bridge to Ollama
+11434/tcp                  ALLOW IN    172.18.0.0/16              # OpenShell cluster to Ollama
+11434/tcp                  ALLOW IN    10.42.0.0/16               # k3s pod network to Ollama
+18789 (v6)                 DENY IN     Anywhere (v6)              # Block OpenShell dashboard from network
+  [0;32m✓[0m avahi-daemon already inactive
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 2 — Docker + NVIDIA runtime
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;34m[hardclaw][0m Configuring NVIDIA container runtime...
+  [0;32m✓[0m NVIDIA runtime configured
+[1;34m[hardclaw][0m Hardening Docker daemon.json...
+  [0;32m✓[0m daemon.json hardened
+[1;34m[hardclaw][0m Restarting Docker...
+[1;34m[hardclaw][0m Verifying NVIDIA runtime via docker info...
+  [0;32m✓[0m NVIDIA runtime registered:  Default Runtime: nvidia
+[1;34m[hardclaw][0m Smoke-testing container launch with NVIDIA runtime...
+  [0;32m✓[0m Container launched successfully with NVIDIA runtime
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 3 — Ollama
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m Ollama already installed: ollama version is 0.20.4
+[1;34m[hardclaw][0m Configuring Ollama to bind 0.0.0.0 (required for Docker bridge access)...
+  [0;32m✓[0m Ollama override.conf written
+[1;34m[hardclaw][0m Waiting for Ollama to start...
+  [0;32m✓[0m Ollama is running at http://localhost:11434
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 4 — Model pull (nemotron-3-super:120b)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m Model nemotron-3-super:120b already present — skipping download
+[1;34m[hardclaw][0m Pre-warming model into memory (type /bye to exit if it prompts)...
+  [0;32m✓[0m Model pre-warmed
+  [0;32m✓[0m Model verified: nemotron-3-super:120b    95acc78b3ffd    86 GB    9 hours ago    
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 5 — NemoClaw install (tag: v0.0.4)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;33m![0m NemoClaw already installed (version: nemoclaw v0.0.4).
+  [1;33m![0m If you want a fresh install, uninstall first:
+  [1;33m![0m   cd ~/.nemoclaw/source && ./uninstall.sh --yes
+  [1;33m![0m Continuing with existing install...
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 6 — Sandbox onboard
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;34m[hardclaw][0m Starting nemoclaw onboard wizard (automated)...
+[1;34m[hardclaw][0m If automation fails, you will be prompted to complete it manually.
+spawn nemoclaw onboard
+
+  NemoClaw Onboarding
+  ===================
+
+  [1/7] Preflight checks
+  ──────────────────────────────────────────────────
+  ✓ Docker is running
+  ✓ Container runtime: docker
+  ✓ openshell CLI: openshell 0.0.25
+  ✓ Port 8080 already owned by healthy NemoClaw runtime (OpenShell gateway)
+  ✓ Port 18789 already owned by healthy NemoClaw runtime (NemoClaw dashboard)
+  ✓ NVIDIA GPU detected: 1 GPU(s), 124546 MB VRAM
+  ✓ Memory OK: 124546 MB RAM + 16383 MB swap
+
+  [2/7] Starting OpenShell gateway
+  ──────────────────────────────────────────────────
+  [reuse] Skipping gateway (running)
+[2m  Reusing healthy NemoClaw gateway.[0m
+
+  [3/7] Configuring inference (NIM)
+  ──────────────────────────────────────────────────
+  Detected local inference option: Ollama
+
+
+  Inference options:
+    1) NVIDIA Endpoints
+    2) OpenAI
+    3) Other OpenAI-compatible endpoint
+    4) Anthropic
+    5) Other Anthropic-compatible endpoint
+    6) Google Gemini
+    7) Local Ollama (localhost:11434) — running (suggested)
+
+[1G[0J  Choose [1]: [15G7
+  ✓ Using Ollama on localhost:11434
+
+  Ollama models:
+    1) nemotron-3-super:120b
+    2) Other...
+
+[1G[0J  Choose model [1]: [21G1
+  Loading Ollama model: nemotron-3-super:120b
+  Responses API available — OpenClaw will use openai-responses.
+
+  [4/7] Setting up inference provider
+  ──────────────────────────────────────────────────
+[1m[32m✓[39m[0m Active gateway set to 'nemoclaw'
+[1m[32m✓[39m[0m Created provider ollama-local
+✓ Created provider ollama-local
+[1m[36mGateway inference configured:[39m[0m
+
+  [2mRoute:[0m inference.local
+  [2mProvider:[0m ollama-local
+  [2mModel:[0m nemotron-3-super:120b
+  [2mVersion:[0m 4
+  [2mTimeout:[0m 60s (default)
+  Priming Ollama model: nemotron-3-super:120b
+  ✓ Inference route set: ollama-local / nemotron-3-super:120b
+
+  [5/7] Creating sandbox
+  ──────────────────────────────────────────────────
+[1G[0J  Sandbox name (lowercase, numbers, hyphens) [my-assistant]: [62Gmy-assistant
+  Creating sandbox 'my-assistant' (this takes a few minutes on first run)...
+  Building image openshell/sandbox-from:1775719771 from /tmp/nemoclaw-build-z1qrIT/Dockerfile
+  Step 1/36 : ARG BASE_IMAGE=ghcr.io/nvidia/nemoclaw/sandbox-base:latest
+  Step 2/36 : FROM node:22-slim@sha256:4f77a690f2f8946ab16fe1e791a3ac0667ae1c3575c3e4d0d4589e9ed5bfaf3d AS builder
+  Step 3/36 : COPY nemoclaw/package.json nemoclaw/tsconfig.json /opt/nemoclaw/
+  Step 4/36 : COPY nemoclaw/src/ /opt/nemoclaw/src/
+  Step 5/36 : WORKDIR /opt/nemoclaw
+  Step 6/36 : RUN npm install && npm run build
+  Step 7/36 : FROM ${BASE_IMAGE}
+  Step 8/36 : RUN (apt-get remove --purge -y gcc gcc-12 g++ g++-12 cpp cpp-12 make         netcat-openbsd netcat-traditional ncat 2>/dev/null || true)     && apt-get autoremove --purge -y     && rm -rf /var/lib/apt/lists/*
+  Step 9/36 : COPY --from=builder /opt/nemoclaw/dist/ /opt/nemoclaw/dist/
+  Step 10/36 : COPY nemoclaw/openclaw.plugin.json /opt/nemoclaw/
+  Step 11/36 : COPY nemoclaw/package.json nemoclaw/package-lock.json /opt/nemoclaw/
+  Step 12/36 : COPY nemoclaw-blueprint/ /opt/nemoclaw-blueprint/
+  Step 13/36 : WORKDIR /opt/nemoclaw
+  Step 14/36 : RUN npm ci --omit=dev
+  Step 15/36 : RUN mkdir -p /sandbox/.nemoclaw/blueprints/0.1.0     && cp -r /opt/nemoclaw-blueprint/* /sandbox/.nemoclaw/blueprints/0.1.0/
+  Step 16/36 : COPY scripts/nemoclaw-start.sh /usr/local/bin/nemoclaw-start
+  Step 17/36 : RUN chmod 755 /usr/local/bin/nemoclaw-start
+  Step 18/36 : ARG NEMOCLAW_MODEL=nemotron-3-super:120b
+  Step 19/36 : ARG NEMOCLAW_PROVIDER_KEY=inference
+  Step 20/36 : ARG NEMOCLAW_PRIMARY_MODEL_REF=inference/nemotron-3-super:120b
+  Step 21/36 : ARG CHAT_UI_URL=http://127.0.0.1:18789
+  Step 22/36 : ARG NEMOCLAW_INFERENCE_BASE_URL=https://inference.local/v1
+  Step 23/36 : ARG NEMOCLAW_INFERENCE_API=openai-responses
+  Step 24/36 : ARG NEMOCLAW_INFERENCE_COMPAT_B64=e30=
+  Step 25/36 : ARG NEMOCLAW_DISABLE_DEVICE_AUTH=1
+  Step 26/36 : ARG NEMOCLAW_BUILD_ID=1775719771197
+  Step 27/36 : ENV NEMOCLAW_MODEL=${NEMOCLAW_MODEL}     NEMOCLAW_PROVIDER_KEY=${NEMOCLAW_PROVIDER_KEY}     NEMOCLAW_PRIMARY_MODEL_REF=${NEMOCLAW_PRIMARY_MODEL_REF}     CHAT_UI_URL=${CHAT_UI_URL}     NEMOCLAW_INFERENCE_BASE_URL=${NEMOCLAW_INFERENCE_BASE_URL}     NEMOCLAW_INFERENCE_API=${NEMOCLAW_INFERENCE_API}     NEMOCLAW_INFERENCE_COMPAT_B64=${NEMOCLAW_INFERENCE_COMPAT_B64}     NEMOCLAW_DISABLE_DEVICE_AUTH=${NEMOCLAW_DISABLE_DEVICE_AUTH}
+  Step 28/36 : WORKDIR /sandbox
+  Step 29/36 : USER sandbox
+  Step 30/36 : RUN python3 -c "import base64, json, os, secrets; from urllib.parse import urlparse; model = os.environ['NEMOCLAW_MODEL']; chat_ui_url = os.environ['CHAT_UI_URL']; provider_key = os.environ['NEMOCLAW_PROVIDER_KEY']; primary_model_ref = os.environ['NEMOCLAW_PRIMARY_MODEL_REF']; inference_base_url = os.environ['NEMOCLAW_INFERENCE_BASE_URL']; inference_api = os.environ['NEMOCLAW_INFERENCE_API']; inference_compat = json.loads(base64.b64decode(os.environ['NEMOCLAW_INFERENCE_COMPAT_B64']).decode('utf-8')); parsed = urlparse(chat_ui_url); chat_origin = f'{parsed.scheme}://{parsed.netloc}' if parsed.scheme and parsed.netloc else 'http://127.0.0.1:18789'; origins = ['http://127.0.0.1:18789']; origins = list(dict.fromkeys(origins + [chat_origin])); disable_device_auth = os.environ.get('NEMOCLAW_DISABLE_DEVICE_AUTH', '') == '1'; allow_insecure = parsed.scheme == 'http'; providers = {     provider_key: {         'baseUrl': inference_base_url,         'apiKey': 'unused',         'api': inference_api,         'models': [{**({'compat': inference_compat} if inference_compat else {}), 'id': model, 'name': primary_model_ref, 'reasoning': False, 'input': ['text'], 'cost': {'input': 0, 'output': 0, 'cacheRead': 0, 'cacheWrite': 0}, 'contextWindow': 131072, 'maxTokens': 4096}]     } }; config = {     'agents': {'defaults': {'model': {'primary': primary_model_ref}}},     'models': {'mode': 'merge', 'providers': providers},     'channels': {'defaults': {'configWrites': False}},     'gateway': {         'mode': 'local',         'controlUi': {             'allowInsecureAuth': allow_insecure,             'dangerouslyDisableDeviceAuth': disable_device_auth,             'allowedOrigins': origins,         },         'trustedProxies': ['127.0.0.1', '::1'],         'auth': {'token': secrets.token_hex(32)}     } }; path = os.path.expanduser('~/.openclaw/openclaw.json'); json.dump(config, open(path, 'w'), indent=2); os.chmod(path, 0o600)"
+  Step 31/36 : RUN openclaw doctor --fix > /dev/null 2>&1 || true     && openclaw plugins install /opt/nemoclaw > /dev/null 2>&1 || true
+  Step 32/36 : USER root
+  Step 33/36 : RUN chown root:root /sandbox/.openclaw     && find /sandbox/.openclaw -mindepth 1 -maxdepth 1 -exec chown -h root:root {} +     && chmod 755 /sandbox/.openclaw     && chmod 444 /sandbox/.openclaw/openclaw.json
+  Step 34/36 : RUN sha256sum /sandbox/.openclaw/openclaw.json > /sandbox/.openclaw/.config-hash     && chmod 444 /sandbox/.openclaw/.config-hash     && chown root:root /sandbox/.openclaw/.config-hash
+  Step 35/36 : ENTRYPOINT ["/usr/local/bin/nemoclaw-start"]
+  Step 36/36 : CMD ["/bin/bash"]
+  Built image openshell/sandbox-from:1775719771
+  Uploading image into OpenShell gateway...
+  Pushing image openshell/sandbox-from:1775719771 into gateway "nemoclaw"
+  [progress] Exported 100 MiB
+  [progress] Exported 200 MiB
+  [progress] Exported 300 MiB
+  [progress] Exported 400 MiB
+  [progress] Exported 500 MiB
+  [progress] Exported 600 MiB
+  [progress] Exported 700 MiB
+  [progress] Exported 800 MiB
+  [progress] Exported 900 MiB
+  [progress] Exported 1000 MiB
+  [progress] Exported 1100 MiB
+  [progress] Exported 1200 MiB
+  [progress] Exported 1300 MiB
+  [progress] Exported 1303 MiB
+  [progress] Uploaded to gateway
+  Image openshell/sandbox-from:1775719771 is available in the gateway.
+  Waiting for sandbox to become ready...
+  Sandbox reported Ready before create stream exited; continuing.
+  Waiting for sandbox to become ready...
+  Waiting for NemoClaw dashboard to become ready...
+  Dashboard taking longer than expected to start. Continuing...
+→ Found forward on sandbox 'elvis'
+[1m[32m✓[39m[0m Stopped forward of port 18789 for sandbox elvis
+  Setting up sandbox DNS proxy...
+Setting up DNS proxy in pod 'my-assistant' (10.200.0.1:53 -> 10.42.0.3)...
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+  [PASS] DNS forwarder running (pid=564): dns-proxy: 10.200.0.1:53 -> 10.42.0.3:53 pid=564
+  [PASS] resolv.conf -> nameserver 10.200.0.1
+  [PASS] iptables: UDP 10.200.0.1:53 ACCEPT rule present
+  [FAIL] getent hosts github.com returned empty (DNS not resolving)
+  DNS verification: 3 passed, 1 failed
+WARNING: DNS setup incomplete. Sandbox DNS resolution may not work. See issue #626.
+  ✓ Sandbox 'my-assistant' created
+
+  [6/7] Setting up OpenClaw inside sandbox
+  ──────────────────────────────────────────────────
+  ✓ OpenClaw gateway launched inside sandbox
+
+  [7/7] Policy presets
+  ──────────────────────────────────────────────────
+
+  Available policy presets:
+    ○ discord — Discord API, gateway, and CDN access
+    ○ docker — Docker Hub and NVIDIA container registry access
+    ○ huggingface — Hugging Face Hub, LFS, and Inference API access
+    ○ jira — Jira and Atlassian Cloud access
+    ○ npm — npm and Yarn registry access (suggested)
+    ○ outlook — Microsoft Outlook and Graph API access
+    ○ pypi — Python Package Index (PyPI) access (suggested)
+    ○ slack — Slack API, Socket Mode, and webhooks access
+    ○ telegram — Telegram Bot API access (suggested)
+
+[1G[0J  Apply suggested presets (pypi, npm, telegram)? [Y/n/list]: [62GY
+[1m[32m✓[39m[0m Policy version 2 submitted (hash: 95d5237bd969)
+[1m[32m✓[39m[0m Policy version 2 loaded (active version: 2)
+  Applied preset: pypi
+[1m[32m✓[39m[0m Policy version 3 submitted (hash: 3068215a1230)
+[1m[32m✓[39m[0m Policy version 3 loaded (active version: 3)
+  Applied preset: npm
+[1m[32m✓[39m[0m Policy version 4 submitted (hash: 3c17e59537fc)
+[1m[32m✓[39m[0m Policy version 4 loaded (active version: 4)
+  Applied preset: telegram
+
+  ──────────────────────────────────────────────────
+  Sandbox      my-assistant (Landlock + seccomp + netns)
+  Model        nemotron-3-super:120b (Local Ollama)
+  NIM          not running
+  ──────────────────────────────────────────────────
+  Run:         nemoclaw my-assistant connect
+  Status:      nemoclaw my-assistant status
+  Logs:        nemoclaw my-assistant logs --follow
+
+  OpenClaw UI (tokenized URL; treat it like a password)
+  Port 18789 must be forwarded before opening this URL.
+  http://127.0.0.1:18789/#token=eb5f027fc22b4c5228515ba57fffa2e5a657db3cf8224264906cb382f5f969ba
+  ──────────────────────────────────────────────────
+
+spawn nemoclaw onboard
+
+  NemoClaw Onboarding
+  ===================
+
+  [1/7] Preflight checks
+  ──────────────────────────────────────────────────
+  ✓ Docker is running
+  ✓ Container runtime: docker
+  ✓ openshell CLI: openshell 0.0.25
+  ✓ Port 8080 already owned by healthy NemoClaw runtime (OpenShell gateway)
+  ✓ Port 18789 already owned by healthy NemoClaw runtime (NemoClaw dashboard)
+  ✓ NVIDIA GPU detected: 1 GPU(s), 124546 MB VRAM
+  ✓ Memory OK: 124546 MB RAM + 16383 MB swap
+
+  [2/7] Starting OpenShell gateway
+  ──────────────────────────────────────────────────
+  [reuse] Skipping gateway (running)
+[2m  Reusing healthy NemoClaw gateway.[0m
+
+  [3/7] Configuring inference (NIM)
+  ──────────────────────────────────────────────────
+  Detected local inference option: Ollama
+
+
+  Inference options:
+    1) NVIDIA Endpoints
+    2) OpenAI
+    3) Other OpenAI-compatible endpoint
+    4) Anthropic
+    5) Other Anthropic-compatible endpoint
+    6) Google Gemini
+    7) Local Ollama (localhost:11434) — running (suggested)
+
+[1G[0J  Choose [1]: [15G7
+  ✓ Using Ollama on localhost:11434
+
+  Ollama models:
+    1) nemotron-3-super:120b
+    2) Other...
+
+[1G[0J  Choose model [1]: [21G1
+  Loading Ollama model: nemotron-3-super:120b
+  Responses API available — OpenClaw will use openai-responses.
+
+  [4/7] Setting up inference provider
+  ──────────────────────────────────────────────────
+[1m[32m✓[39m[0m Active gateway set to 'nemoclaw'
+[1m[32m✓[39m[0m Created provider ollama-local
+✓ Created provider ollama-local
+[1m[36mGateway inference configured:[39m[0m
+
+  [2mRoute:[0m inference.local
+  [2mProvider:[0m ollama-local
+  [2mModel:[0m nemotron-3-super:120b
+  [2mVersion:[0m 4
+  [2mTimeout:[0m 60s (default)
+  Priming Ollama model: nemotron-3-super:120b
+  ✓ Inference route set: ollama-local / nemotron-3-super:120b
+
+  [5/7] Creating sandbox
+  ──────────────────────────────────────────────────
+[1G[0J  Sandbox name (lowercase, numbers, hyphens) [my-assistant]: [62Gmy-assistant
+  Creating sandbox 'my-assistant' (this takes a few minutes on first run)...
+  Building image openshell/sandbox-from:1775719771 from /tmp/nemoclaw-build-z1qrIT/Dockerfile
+  Step 1/36 : ARG BASE_IMAGE=ghcr.io/nvidia/nemoclaw/sandbox-base:latest
+  Step 2/36 : FROM node:22-slim@sha256:4f77a690f2f8946ab16fe1e791a3ac0667ae1c3575c3e4d0d4589e9ed5bfaf3d AS builder
+  Step 3/36 : COPY nemoclaw/package.json nemoclaw/tsconfig.json /opt/nemoclaw/
+  Step 4/36 : COPY nemoclaw/src/ /opt/nemoclaw/src/
+  Step 5/36 : WORKDIR /opt/nemoclaw
+  Step 6/36 : RUN npm install && npm run build
+  Step 7/36 : FROM ${BASE_IMAGE}
+  Step 8/36 : RUN (apt-get remove --purge -y gcc gcc-12 g++ g++-12 cpp cpp-12 make         netcat-openbsd netcat-traditional ncat 2>/dev/null || true)     && apt-get autoremove --purge -y     && rm -rf /var/lib/apt/lists/*
+  Step 9/36 : COPY --from=builder /opt/nemoclaw/dist/ /opt/nemoclaw/dist/
+  Step 10/36 : COPY nemoclaw/openclaw.plugin.json /opt/nemoclaw/
+  Step 11/36 : COPY nemoclaw/package.json nemoclaw/package-lock.json /opt/nemoclaw/
+  Step 12/36 : COPY nemoclaw-blueprint/ /opt/nemoclaw-blueprint/
+  Step 13/36 : WORKDIR /opt/nemoclaw
+  Step 14/36 : RUN npm ci --omit=dev
+  Step 15/36 : RUN mkdir -p /sandbox/.nemoclaw/blueprints/0.1.0     && cp -r /opt/nemoclaw-blueprint/* /sandbox/.nemoclaw/blueprints/0.1.0/
+  Step 16/36 : COPY scripts/nemoclaw-start.sh /usr/local/bin/nemoclaw-start
+  Step 17/36 : RUN chmod 755 /usr/local/bin/nemoclaw-start
+  Step 18/36 : ARG NEMOCLAW_MODEL=nemotron-3-super:120b
+  Step 19/36 : ARG NEMOCLAW_PROVIDER_KEY=inference
+  Step 20/36 : ARG NEMOCLAW_PRIMARY_MODEL_REF=inference/nemotron-3-super:120b
+  Step 21/36 : ARG CHAT_UI_URL=http://127.0.0.1:18789
+  Step 22/36 : ARG NEMOCLAW_INFERENCE_BASE_URL=https://inference.local/v1
+  Step 23/36 : ARG NEMOCLAW_INFERENCE_API=openai-responses
+  Step 24/36 : ARG NEMOCLAW_INFERENCE_COMPAT_B64=e30=
+  Step 25/36 : ARG NEMOCLAW_DISABLE_DEVICE_AUTH=1
+  Step 26/36 : ARG NEMOCLAW_BUILD_ID=1775719771197
+  Step 27/36 : ENV NEMOCLAW_MODEL=${NEMOCLAW_MODEL}     NEMOCLAW_PROVIDER_KEY=${NEMOCLAW_PROVIDER_KEY}     NEMOCLAW_PRIMARY_MODEL_REF=${NEMOCLAW_PRIMARY_MODEL_REF}     CHAT_UI_URL=${CHAT_UI_URL}     NEMOCLAW_INFERENCE_BASE_URL=${NEMOCLAW_INFERENCE_BASE_URL}     NEMOCLAW_INFERENCE_API=${NEMOCLAW_INFERENCE_API}     NEMOCLAW_INFERENCE_COMPAT_B64=${NEMOCLAW_INFERENCE_COMPAT_B64}     NEMOCLAW_DISABLE_DEVICE_AUTH=${NEMOCLAW_DISABLE_DEVICE_AUTH}
+  Step 28/36 : WORKDIR /sandbox
+  Step 29/36 : USER sandbox
+  Step 30/36 : RUN python3 -c "import base64, json, os, secrets; from urllib.parse import urlparse; model = os.environ['NEMOCLAW_MODEL']; chat_ui_url = os.environ['CHAT_UI_URL']; provider_key = os.environ['NEMOCLAW_PROVIDER_KEY']; primary_model_ref = os.environ['NEMOCLAW_PRIMARY_MODEL_REF']; inference_base_url = os.environ['NEMOCLAW_INFERENCE_BASE_URL']; inference_api = os.environ['NEMOCLAW_INFERENCE_API']; inference_compat = json.loads(base64.b64decode(os.environ['NEMOCLAW_INFERENCE_COMPAT_B64']).decode('utf-8')); parsed = urlparse(chat_ui_url); chat_origin = f'{parsed.scheme}://{parsed.netloc}' if parsed.scheme and parsed.netloc else 'http://127.0.0.1:18789'; origins = ['http://127.0.0.1:18789']; origins = list(dict.fromkeys(origins + [chat_origin])); disable_device_auth = os.environ.get('NEMOCLAW_DISABLE_DEVICE_AUTH', '') == '1'; allow_insecure = parsed.scheme == 'http'; providers = {     provider_key: {         'baseUrl': inference_base_url,         'apiKey': 'unused',         'api': inference_api,         'models': [{**({'compat': inference_compat} if inference_compat else {}), 'id': model, 'name': primary_model_ref, 'reasoning': False, 'input': ['text'], 'cost': {'input': 0, 'output': 0, 'cacheRead': 0, 'cacheWrite': 0}, 'contextWindow': 131072, 'maxTokens': 4096}]     } }; config = {     'agents': {'defaults': {'model': {'primary': primary_model_ref}}},     'models': {'mode': 'merge', 'providers': providers},     'channels': {'defaults': {'configWrites': False}},     'gateway': {         'mode': 'local',         'controlUi': {             'allowInsecureAuth': allow_insecure,             'dangerouslyDisableDeviceAuth': disable_device_auth,             'allowedOrigins': origins,         },         'trustedProxies': ['127.0.0.1', '::1'],         'auth': {'token': secrets.token_hex(32)}     } }; path = os.path.expanduser('~/.openclaw/openclaw.json'); json.dump(config, open(path, 'w'), indent=2); os.chmod(path, 0o600)"
+  Step 31/36 : RUN openclaw doctor --fix > /dev/null 2>&1 || true     && openclaw plugins install /opt/nemoclaw > /dev/null 2>&1 || true
+  Step 32/36 : USER root
+  Step 33/36 : RUN chown root:root /sandbox/.openclaw     && find /sandbox/.openclaw -mindepth 1 -maxdepth 1 -exec chown -h root:root {} +     && chmod 755 /sandbox/.openclaw     && chmod 444 /sandbox/.openclaw/openclaw.json
+  Step 34/36 : RUN sha256sum /sandbox/.openclaw/openclaw.json > /sandbox/.openclaw/.config-hash     && chmod 444 /sandbox/.openclaw/.config-hash     && chown root:root /sandbox/.openclaw/.config-hash
+  Step 35/36 : ENTRYPOINT ["/usr/local/bin/nemoclaw-start"]
+  Step 36/36 : CMD ["/bin/bash"]
+  Built image openshell/sandbox-from:1775719771
+  Uploading image into OpenShell gateway...
+  Pushing image openshell/sandbox-from:1775719771 into gateway "nemoclaw"
+  [progress] Exported 100 MiB
+  [progress] Exported 200 MiB
+  [progress] Exported 300 MiB
+  [progress] Exported 400 MiB
+  [progress] Exported 500 MiB
+  [progress] Exported 600 MiB
+  [progress] Exported 700 MiB
+  [progress] Exported 800 MiB
+  [progress] Exported 900 MiB
+  [progress] Exported 1000 MiB
+  [progress] Exported 1100 MiB
+  [progress] Exported 1200 MiB
+  [progress] Exported 1300 MiB
+  [progress] Exported 1303 MiB
+  [progress] Uploaded to gateway
+  Image openshell/sandbox-from:1775719771 is available in the gateway.
+  Waiting for sandbox to become ready...
+  Sandbox reported Ready before create stream exited; continuing.
+  Waiting for sandbox to become ready...
+  Waiting for NemoClaw dashboard to become ready...
+  Dashboard taking longer than expected to start. Continuing...
+→ Found forward on sandbox 'elvis'
+[1m[32m✓[39m[0m Stopped forward of port 18789 for sandbox elvis
+  Setting up sandbox DNS proxy...
+Setting up DNS proxy in pod 'my-assistant' (10.200.0.1:53 -> 10.42.0.3)...
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+  [PASS] DNS forwarder running (pid=564): dns-proxy: 10.200.0.1:53 -> 10.42.0.3:53 pid=564
+  [PASS] resolv.conf -> nameserver 10.200.0.1
+  [PASS] iptables: UDP 10.200.0.1:53 ACCEPT rule present
+  [FAIL] getent hosts github.com returned empty (DNS not resolving)
+  DNS verification: 3 passed, 1 failed
+WARNING: DNS setup incomplete. Sandbox DNS resolution may not work. See issue #626.
+  ✓ Sandbox 'my-assistant' created
+
+  [6/7] Setting up OpenClaw inside sandbox
+  ──────────────────────────────────────────────────
+  ✓ OpenClaw gateway launched inside sandbox
+
+  [7/7] Policy presets
+  ──────────────────────────────────────────────────
+
+  Available policy presets:
+    ○ discord — Discord API, gateway, and CDN access
+    ○ docker — Docker Hub and NVIDIA container registry access
+    ○ huggingface — Hugging Face Hub, LFS, and Inference API access
+    ○ jira — Jira and Atlassian Cloud access
+    ○ npm — npm and Yarn registry access (suggested)
+    ○ outlook — Microsoft Outlook and Graph API access
+    ○ pypi — Python Package Index (PyPI) access (suggested)
+    ○ slack — Slack API, Socket Mode, and webhooks access
+    ○ telegram — Telegram Bot API access (suggested)
+
+[1G[0J  Apply suggested presets (pypi, npm, telegram)? [Y/n/list]: [62GY
+[1m[32m✓[39m[0m Policy version 2 submitted (hash: 95d5237bd969)
+[1m[32m✓[39m[0m Policy version 2 loaded (active version: 2)
+  Applied preset: pypi
+[1m[32m✓[39m[0m Policy version 3 submitted (hash: 3068215a1230)
+[1m[32m✓[39m[0m Policy version 3 loaded (active version: 3)
+  Applied preset: npm
+[1m[32m✓[39m[0m Policy version 4 submitted (hash: 3c17e59537fc)
+[1m[32m✓[39m[0m Policy version 4 loaded (active version: 4)
+  Applied preset: telegram
+
+  ──────────────────────────────────────────────────
+  Sandbox      my-assistant (Landlock + seccomp + netns)
+  Model        nemotron-3-super:120b (Local Ollama)
+  NIM          not running
+  ──────────────────────────────────────────────────
+  Run:         nemoclaw my-assistant connect
+  Status:      nemoclaw my-assistant status
+  Logs:        nemoclaw my-assistant logs --follow
+
+  OpenClaw UI (tokenized URL; treat it like a password)
+  Port 18789 must be forwarded before opening this URL.
+  http://127.0.0.1:18789/#token=eb5f027fc22b4c5228515ba57fffa2e5a657db3cf8224264906cb382f5f969ba
+  ──────────────────────────────────────────────────
+
+  [0;32m✓[0m Dashboard token saved to /home/democenter/.nemoclaw/dashboard-token.txt
+  [0;32m✓[0m Sandbox 'my-assistant' is running
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 7 — Sandbox policy hardening
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;34m[hardclaw][0m Current policy:
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Default policy for the OpenClaw sandbox.
+# Principle: deny by default, allow only what's needed for core functionality.
+# Dynamic updates (network_policies, inference) can be applied post-creation
+# via `openshell policy set`. Static fields are effectively creation-locked.
+#
+# Policy tiers (future):
+#   default — this file. Minimum for onboard + basic agent operation.
+#   relaxed — adds third-party model providers, broader web access.
+#
+# To add endpoints: update this file and re-run `nemoclaw onboard`
+# or apply dynamically via `openshell policy set`.
+
+version: 1
+
+filesystem_policy:
+  include_workdir: true
+  read_only:
+    - /usr
+    - /lib
+    - /proc
+    - /dev/urandom
+    - /app
+    - /etc
+    - /var/log
+    - /sandbox/.openclaw            # Immutable gateway config — prevents agent
+                                    # from tampering with auth tokens or CORS.
+                                    # Writable state (agents, plugins) lives in
+                                    # /sandbox/.openclaw-data via symlinks.
+                                    # Ref: https://github.com/NVIDIA/NemoClaw/issues/514
+  read_write:
+    - /sandbox
+    - /tmp
+    - /dev/null
+    - /sandbox/.openclaw-data       # Writable agent/plugin state (symlinked from .openclaw)
+
+landlock:
+  compatibility: best_effort
+
+process:
+  run_as_user: sandbox
+  run_as_group: sandbox
+
+network_policies:
+  claude_code:
+    name: claude_code
+    endpoints:
+      - host: api.anthropic.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+          - allow: { method: POST, path: "/**" }
+      - host: statsig.anthropic.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+          - allow: { method: POST, path: "/**" }
+      - host: sentry.io
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+          - allow: { method: POST, path: "/**" }
+    binaries:
+      - { path: /usr/local/bin/claude }
+
+  nvidia:
+    name: nvidia
+    endpoints:
+      - host: integrate.api.nvidia.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+          - allow: { method: POST, path: "/**" }
+      - host: inference-api.nvidia.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+          - allow: { method: POST, path: "/**" }
+    binaries:
+      - { path: /usr/local/bin/claude }
+      - { path: /usr/local/bin/openclaw }
+
+  github:
+    name: github
+    endpoints:
+      - host: github.com
+        port: 443
+        access: full
+      - host: api.github.com
+        port: 443
+        access: full
+    binaries:
+      - { path: /usr/bin/gh }
+      - { path: /usr/bin/git }
+
+  # ── OpenClaw "phone home" ────────────────────────────────────────────
+  # Minimum viable set for OpenClaw to authenticate, discover plugins,
+  # and reach ClawHub. Restricted to openclaw and node (skill flows run on Node).
+  # Docs access is read-only (GET). ClawHub and openclaw.ai are
+  # restricted to GET+POST (auth flows, plugin discovery).
+
+  clawhub:
+    name: clawhub
+    endpoints:
+      - host: clawhub.ai
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+          - allow: { method: POST, path: "/**" }
+    binaries:
+      - { path: /usr/local/bin/openclaw }
+      - { path: /usr/local/bin/node }
+
+  openclaw_api:
+    name: openclaw_api
+    endpoints:
+      - host: openclaw.ai
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+          - allow: { method: POST, path: "/**" }
+    binaries:
+      - { path: /usr/local/bin/openclaw }
+      - { path: /usr/local/bin/node }
+
+  openclaw_docs:
+    name: openclaw_docs
+    endpoints:
+      - host: docs.openclaw.ai
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+    binaries:
+      - { path: /usr/local/bin/openclaw }
+
+  # npm registry — needed for `openclaw plugins install` and `npm install`
+  npm_registry:
+    name: npm_registry
+    endpoints:
+      - host: registry.npmjs.org
+        port: 443
+        access: full
+    binaries:
+      - { path: /usr/local/bin/openclaw }
+      - { path: /usr/local/bin/npm }
+      - { path: /usr/local/bin/node }
+
+  # ── Messaging — pre-allowed for OpenClaw agent notifications ────
+  # Restricted to node processes to prevent arbitrary data exfiltration
+  # via curl, wget, python, etc. (See: #272)
+  telegram:
+    name: telegram
+    endpoints:
+      - host: api.telegram.org
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/bot*/**" }
+          - allow: { method: POST, path: "/bot*/**" }
+          - allow: { method: GET, path: "/file/bot*/**" }
+    binaries:
+      - { path: /usr/local/bin/node }
+
+  discord:
+    name: discord
+    endpoints:
+      - host: discord.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+          - allow: { method: POST, path: "/**" }
+      # WebSocket gateway — must use access: full (CONNECT tunnel) instead
+      # of protocol: rest. The proxy's HTTP idle timeout (~2 min) kills
+      # long-lived WebSocket connections; a CONNECT tunnel avoids
+      # HTTP-level timeouts entirely. Matches presets/discord.yaml. See #409.
+      - host: gateway.discord.gg
+        port: 443
+        access: full
+      - host: cdn.discordapp.com
+        port: 443
+        protocol: rest
+        enforcement: enforce
+        tls: terminate
+        rules:
+          - allow: { method: GET, path: "/**" }
+    binaries:
+      - { path: /usr/local/bin/node }
+[1;34m[hardclaw][0m Writing hardened policy (deny-all network baseline)...
+  [0;32m✓[0m Hardened policy written
+[1;34m[hardclaw][0m Destroying sandbox to re-apply policy (this is required — not destructive to data)...
+[1;34m[hardclaw][0m Recreating sandbox with hardened policy...
+[1;34m[hardclaw][0m Starting nemoclaw onboard wizard (automated)...
+[1;34m[hardclaw][0m If automation fails, you will be prompted to complete it manually.
+spawn nemoclaw onboard
+
+  NemoClaw Onboarding
+  ===================
+
+  [1/7] Preflight checks
+  ──────────────────────────────────────────────────
+  ✓ Docker is running
+  ✓ Container runtime: docker
+  ✓ openshell CLI: openshell 0.0.25
+  ✓ Port 8080 already owned by healthy NemoClaw runtime (OpenShell gateway)
+  ✓ Port 18789 available (NemoClaw dashboard)
+  ✓ NVIDIA GPU detected: 1 GPU(s), 124546 MB VRAM
+  ✓ Memory OK: 124546 MB RAM + 16383 MB swap
+
+  [2/7] Starting OpenShell gateway
+  ──────────────────────────────────────────────────
+  [reuse] Skipping gateway (running)
+[2m  Reusing healthy NemoClaw gateway.[0m
+
+  [3/7] Configuring inference (NIM)
+  ──────────────────────────────────────────────────
+  Detected local inference option: Ollama
+
+
+  Inference options:
+    1) NVIDIA Endpoints
+    2) OpenAI
+    3) Other OpenAI-compatible endpoint
+    4) Anthropic
+    5) Other Anthropic-compatible endpoint
+    6) Google Gemini
+    7) Local Ollama (localhost:11434) — running (suggested)
+
+[1G[0J  Choose [1]: [15G7
+  ✓ Using Ollama on localhost:11434
+
+  Ollama models:
+    1) nemotron-3-super:120b
+    2) Other...
+
+[1G[0J  Choose model [1]: [21G1
+  Loading Ollama model: nemotron-3-super:120b
+  Responses API available — OpenClaw will use openai-responses.
+
+  [4/7] Setting up inference provider
+  ──────────────────────────────────────────────────
+[1m[32m✓[39m[0m Active gateway set to 'nemoclaw'
+Error:   × status: AlreadyExists, message: "provider already exists", details: [],
+  │ metadata: MetadataMap { headers: {"content-type": "application/grpc",
+  │ "date": "Thu, 09 Apr 2026 07:32:23 GMT"} }
+
+[1m[32m✓[39m[0m Updated provider ollama-local
+✓ Updated provider ollama-local
+[1m[36mGateway inference configured:[39m[0m
+
+  [2mRoute:[0m inference.local
+  [2mProvider:[0m ollama-local
+  [2mModel:[0m nemotron-3-super:120b
+  [2mVersion:[0m 5
+  [2mTimeout:[0m 60s (default)
+  Priming Ollama model: nemotron-3-super:120b
+  ✓ Inference route set: ollama-local / nemotron-3-super:120b
+
+  [5/7] Creating sandbox
+  ──────────────────────────────────────────────────
+[1G[0J  Sandbox name (lowercase, numbers, hyphens) [my-assistant]: [62Gmy-assistant
+  Creating sandbox 'my-assistant' (this takes a few minutes on first run)...
+  Building image openshell/sandbox-from:1775719950 from /tmp/nemoclaw-build-baNaO1/Dockerfile
+  Step 1/36 : ARG BASE_IMAGE=ghcr.io/nvidia/nemoclaw/sandbox-base:latest
+  Step 2/36 : FROM node:22-slim@sha256:4f77a690f2f8946ab16fe1e791a3ac0667ae1c3575c3e4d0d4589e9ed5bfaf3d AS builder
+  Step 3/36 : COPY nemoclaw/package.json nemoclaw/tsconfig.json /opt/nemoclaw/
+  Step 4/36 : COPY nemoclaw/src/ /opt/nemoclaw/src/
+  Step 5/36 : WORKDIR /opt/nemoclaw
+  Step 6/36 : RUN npm install && npm run build
+  Step 7/36 : FROM ${BASE_IMAGE}
+  Step 8/36 : RUN (apt-get remove --purge -y gcc gcc-12 g++ g++-12 cpp cpp-12 make         netcat-openbsd netcat-traditional ncat 2>/dev/null || true)     && apt-get autoremove --purge -y     && rm -rf /var/lib/apt/lists/*
+  Step 9/36 : COPY --from=builder /opt/nemoclaw/dist/ /opt/nemoclaw/dist/
+  Step 10/36 : COPY nemoclaw/openclaw.plugin.json /opt/nemoclaw/
+  Step 11/36 : COPY nemoclaw/package.json nemoclaw/package-lock.json /opt/nemoclaw/
+  Step 12/36 : COPY nemoclaw-blueprint/ /opt/nemoclaw-blueprint/
+  Step 13/36 : WORKDIR /opt/nemoclaw
+  Step 14/36 : RUN npm ci --omit=dev
+  Step 15/36 : RUN mkdir -p /sandbox/.nemoclaw/blueprints/0.1.0     && cp -r /opt/nemoclaw-blueprint/* /sandbox/.nemoclaw/blueprints/0.1.0/
+  Step 16/36 : COPY scripts/nemoclaw-start.sh /usr/local/bin/nemoclaw-start
+  Step 17/36 : RUN chmod 755 /usr/local/bin/nemoclaw-start
+  Step 18/36 : ARG NEMOCLAW_MODEL=nemotron-3-super:120b
+  Step 19/36 : ARG NEMOCLAW_PROVIDER_KEY=inference
+  Step 20/36 : ARG NEMOCLAW_PRIMARY_MODEL_REF=inference/nemotron-3-super:120b
+  Step 21/36 : ARG CHAT_UI_URL=http://127.0.0.1:18789
+  Step 22/36 : ARG NEMOCLAW_INFERENCE_BASE_URL=https://inference.local/v1
+  Step 23/36 : ARG NEMOCLAW_INFERENCE_API=openai-responses
+  Step 24/36 : ARG NEMOCLAW_INFERENCE_COMPAT_B64=e30=
+  Step 25/36 : ARG NEMOCLAW_DISABLE_DEVICE_AUTH=1
+  Step 26/36 : ARG NEMOCLAW_BUILD_ID=1775719950798
+  Step 27/36 : ENV NEMOCLAW_MODEL=${NEMOCLAW_MODEL}     NEMOCLAW_PROVIDER_KEY=${NEMOCLAW_PROVIDER_KEY}     NEMOCLAW_PRIMARY_MODEL_REF=${NEMOCLAW_PRIMARY_MODEL_REF}     CHAT_UI_URL=${CHAT_UI_URL}     NEMOCLAW_INFERENCE_BASE_URL=${NEMOCLAW_INFERENCE_BASE_URL}     NEMOCLAW_INFERENCE_API=${NEMOCLAW_INFERENCE_API}     NEMOCLAW_INFERENCE_COMPAT_B64=${NEMOCLAW_INFERENCE_COMPAT_B64}     NEMOCLAW_DISABLE_DEVICE_AUTH=${NEMOCLAW_DISABLE_DEVICE_AUTH}
+  Step 28/36 : WORKDIR /sandbox
+  Step 29/36 : USER sandbox
+  Step 30/36 : RUN python3 -c "import base64, json, os, secrets; from urllib.parse import urlparse; model = os.environ['NEMOCLAW_MODEL']; chat_ui_url = os.environ['CHAT_UI_URL']; provider_key = os.environ['NEMOCLAW_PROVIDER_KEY']; primary_model_ref = os.environ['NEMOCLAW_PRIMARY_MODEL_REF']; inference_base_url = os.environ['NEMOCLAW_INFERENCE_BASE_URL']; inference_api = os.environ['NEMOCLAW_INFERENCE_API']; inference_compat = json.loads(base64.b64decode(os.environ['NEMOCLAW_INFERENCE_COMPAT_B64']).decode('utf-8')); parsed = urlparse(chat_ui_url); chat_origin = f'{parsed.scheme}://{parsed.netloc}' if parsed.scheme and parsed.netloc else 'http://127.0.0.1:18789'; origins = ['http://127.0.0.1:18789']; origins = list(dict.fromkeys(origins + [chat_origin])); disable_device_auth = os.environ.get('NEMOCLAW_DISABLE_DEVICE_AUTH', '') == '1'; allow_insecure = parsed.scheme == 'http'; providers = {     provider_key: {         'baseUrl': inference_base_url,         'apiKey': 'unused',         'api': inference_api,         'models': [{**({'compat': inference_compat} if inference_compat else {}), 'id': model, 'name': primary_model_ref, 'reasoning': False, 'input': ['text'], 'cost': {'input': 0, 'output': 0, 'cacheRead': 0, 'cacheWrite': 0}, 'contextWindow': 131072, 'maxTokens': 4096}]     } }; config = {     'agents': {'defaults': {'model': {'primary': primary_model_ref}}},     'models': {'mode': 'merge', 'providers': providers},     'channels': {'defaults': {'configWrites': False}},     'gateway': {         'mode': 'local',         'controlUi': {             'allowInsecureAuth': allow_insecure,             'dangerouslyDisableDeviceAuth': disable_device_auth,             'allowedOrigins': origins,         },         'trustedProxies': ['127.0.0.1', '::1'],         'auth': {'token': secrets.token_hex(32)}     } }; path = os.path.expanduser('~/.openclaw/openclaw.json'); json.dump(config, open(path, 'w'), indent=2); os.chmod(path, 0o600)"
+  Step 31/36 : RUN openclaw doctor --fix > /dev/null 2>&1 || true     && openclaw plugins install /opt/nemoclaw > /dev/null 2>&1 || true
+  Step 32/36 : USER root
+  Step 33/36 : RUN chown root:root /sandbox/.openclaw     && find /sandbox/.openclaw -mindepth 1 -maxdepth 1 -exec chown -h root:root {} +     && chmod 755 /sandbox/.openclaw     && chmod 444 /sandbox/.openclaw/openclaw.json
+  Step 34/36 : RUN sha256sum /sandbox/.openclaw/openclaw.json > /sandbox/.openclaw/.config-hash     && chmod 444 /sandbox/.openclaw/.config-hash     && chown root:root /sandbox/.openclaw/.config-hash
+  Step 35/36 : ENTRYPOINT ["/usr/local/bin/nemoclaw-start"]
+  Step 36/36 : CMD ["/bin/bash"]
+  Built image openshell/sandbox-from:1775719950
+  Uploading image into OpenShell gateway...
+  Pushing image openshell/sandbox-from:1775719950 into gateway "nemoclaw"
+  [progress] Exported 100 MiB
+  [progress] Exported 200 MiB
+  [progress] Exported 300 MiB
+  [progress] Exported 400 MiB
+  [progress] Exported 500 MiB
+  [progress] Exported 600 MiB
+  [progress] Exported 700 MiB
+  [progress] Exported 800 MiB
+  [progress] Exported 900 MiB
+  [progress] Exported 1000 MiB
+  [progress] Exported 1100 MiB
+  [progress] Exported 1200 MiB
+  [progress] Exported 1300 MiB
+  [progress] Exported 1303 MiB
+  [progress] Uploaded to gateway
+  Image openshell/sandbox-from:1775719950 is available in the gateway.
+  Waiting for sandbox to become ready...
+  Sandbox reported Ready before create stream exited; continuing.
+  Waiting for sandbox to become ready...
+  Waiting for NemoClaw dashboard to become ready...
+  Dashboard taking longer than expected to start. Continuing...
+[33m![39m No active forward found for port 18789
+  Setting up sandbox DNS proxy...
+Setting up DNS proxy in pod 'my-assistant' (10.200.0.1:53 -> 10.42.0.3)...
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+  [PASS] DNS forwarder running (pid=564): dns-proxy: 10.200.0.1:53 -> 10.42.0.3:53 pid=564
+  [PASS] resolv.conf -> nameserver 10.200.0.1
+  [PASS] iptables: UDP 10.200.0.1:53 ACCEPT rule present
+  [FAIL] getent hosts github.com returned empty (DNS not resolving)
+  DNS verification: 3 passed, 1 failed
+WARNING: DNS setup incomplete. Sandbox DNS resolution may not work. See issue #626.
+  ✓ Sandbox 'my-assistant' created
+
+  [6/7] Setting up OpenClaw inside sandbox
+  ──────────────────────────────────────────────────
+  ✓ OpenClaw gateway launched inside sandbox
+
+  [7/7] Policy presets
+  ──────────────────────────────────────────────────
+
+  Available policy presets:
+    ○ discord — Discord API, gateway, and CDN access
+    ○ docker — Docker Hub and NVIDIA container registry access
+    ○ huggingface — Hugging Face Hub, LFS, and Inference API access
+    ○ jira — Jira and Atlassian Cloud access
+    ○ npm — npm and Yarn registry access (suggested)
+    ○ outlook — Microsoft Outlook and Graph API access
+    ○ pypi — Python Package Index (PyPI) access (suggested)
+    ○ slack — Slack API, Socket Mode, and webhooks access
+    ○ telegram — Telegram Bot API access (suggested)
+
+[1G[0J  Apply suggested presets (pypi, npm, telegram)? [Y/n/list]: [62GY
+[1m[32m✓[39m[0m Policy version 2 submitted (hash: 301e5bfc7311)
+[1m[32m✓[39m[0m Policy version 2 loaded (active version: 2)
+  Applied preset: pypi
+[1m[32m✓[39m[0m Policy version 3 submitted (hash: 6f121876784a)
+[1m[32m✓[39m[0m Policy version 3 loaded (active version: 3)
+  Applied preset: npm
+[1m[32m✓[39m[0m Policy version 4 submitted (hash: f99716a3c23a)
+[1m[32m✓[39m[0m Policy version 4 loaded (active version: 4)
+  Applied preset: telegram
+
+  ──────────────────────────────────────────────────
+  Sandbox      my-assistant (Landlock + seccomp + netns)
+  Model        nemotron-3-super:120b (Local Ollama)
+  NIM          not running
+  ──────────────────────────────────────────────────
+  Run:         nemoclaw my-assistant connect
+  Status:      nemoclaw my-assistant status
+  Logs:        nemoclaw my-assistant logs --follow
+
+  OpenClaw UI (tokenized URL; treat it like a password)
+  Port 18789 must be forwarded before opening this URL.
+  http://127.0.0.1:18789/#token=7839f9775f1ad89df5d4d10a08402efee41bc25640555184bcd5f378135fe740
+  ──────────────────────────────────────────────────
+
+spawn nemoclaw onboard
+
+  NemoClaw Onboarding
+  ===================
+
+  [1/7] Preflight checks
+  ──────────────────────────────────────────────────
+  ✓ Docker is running
+  ✓ Container runtime: docker
+  ✓ openshell CLI: openshell 0.0.25
+  ✓ Port 8080 already owned by healthy NemoClaw runtime (OpenShell gateway)
+  ✓ Port 18789 available (NemoClaw dashboard)
+  ✓ NVIDIA GPU detected: 1 GPU(s), 124546 MB VRAM
+  ✓ Memory OK: 124546 MB RAM + 16383 MB swap
+
+  [2/7] Starting OpenShell gateway
+  ──────────────────────────────────────────────────
+  [reuse] Skipping gateway (running)
+[2m  Reusing healthy NemoClaw gateway.[0m
+
+  [3/7] Configuring inference (NIM)
+  ──────────────────────────────────────────────────
+  Detected local inference option: Ollama
+
+
+  Inference options:
+    1) NVIDIA Endpoints
+    2) OpenAI
+    3) Other OpenAI-compatible endpoint
+    4) Anthropic
+    5) Other Anthropic-compatible endpoint
+    6) Google Gemini
+    7) Local Ollama (localhost:11434) — running (suggested)
+
+[1G[0J  Choose [1]: [15G7
+  ✓ Using Ollama on localhost:11434
+
+  Ollama models:
+    1) nemotron-3-super:120b
+    2) Other...
+
+[1G[0J  Choose model [1]: [21G1
+  Loading Ollama model: nemotron-3-super:120b
+  Responses API available — OpenClaw will use openai-responses.
+
+  [4/7] Setting up inference provider
+  ──────────────────────────────────────────────────
+[1m[32m✓[39m[0m Active gateway set to 'nemoclaw'
+Error:   × status: AlreadyExists, message: "provider already exists", details: [],
+  │ metadata: MetadataMap { headers: {"content-type": "application/grpc",
+  │ "date": "Thu, 09 Apr 2026 07:32:23 GMT"} }
+
+[1m[32m✓[39m[0m Updated provider ollama-local
+✓ Updated provider ollama-local
+[1m[36mGateway inference configured:[39m[0m
+
+  [2mRoute:[0m inference.local
+  [2mProvider:[0m ollama-local
+  [2mModel:[0m nemotron-3-super:120b
+  [2mVersion:[0m 5
+  [2mTimeout:[0m 60s (default)
+  Priming Ollama model: nemotron-3-super:120b
+  ✓ Inference route set: ollama-local / nemotron-3-super:120b
+
+  [5/7] Creating sandbox
+  ──────────────────────────────────────────────────
+[1G[0J  Sandbox name (lowercase, numbers, hyphens) [my-assistant]: [62Gmy-assistant
+  Creating sandbox 'my-assistant' (this takes a few minutes on first run)...
+  Building image openshell/sandbox-from:1775719950 from /tmp/nemoclaw-build-baNaO1/Dockerfile
+  Step 1/36 : ARG BASE_IMAGE=ghcr.io/nvidia/nemoclaw/sandbox-base:latest
+  Step 2/36 : FROM node:22-slim@sha256:4f77a690f2f8946ab16fe1e791a3ac0667ae1c3575c3e4d0d4589e9ed5bfaf3d AS builder
+  Step 3/36 : COPY nemoclaw/package.json nemoclaw/tsconfig.json /opt/nemoclaw/
+  Step 4/36 : COPY nemoclaw/src/ /opt/nemoclaw/src/
+  Step 5/36 : WORKDIR /opt/nemoclaw
+  Step 6/36 : RUN npm install && npm run build
+  Step 7/36 : FROM ${BASE_IMAGE}
+  Step 8/36 : RUN (apt-get remove --purge -y gcc gcc-12 g++ g++-12 cpp cpp-12 make         netcat-openbsd netcat-traditional ncat 2>/dev/null || true)     && apt-get autoremove --purge -y     && rm -rf /var/lib/apt/lists/*
+  Step 9/36 : COPY --from=builder /opt/nemoclaw/dist/ /opt/nemoclaw/dist/
+  Step 10/36 : COPY nemoclaw/openclaw.plugin.json /opt/nemoclaw/
+  Step 11/36 : COPY nemoclaw/package.json nemoclaw/package-lock.json /opt/nemoclaw/
+  Step 12/36 : COPY nemoclaw-blueprint/ /opt/nemoclaw-blueprint/
+  Step 13/36 : WORKDIR /opt/nemoclaw
+  Step 14/36 : RUN npm ci --omit=dev
+  Step 15/36 : RUN mkdir -p /sandbox/.nemoclaw/blueprints/0.1.0     && cp -r /opt/nemoclaw-blueprint/* /sandbox/.nemoclaw/blueprints/0.1.0/
+  Step 16/36 : COPY scripts/nemoclaw-start.sh /usr/local/bin/nemoclaw-start
+  Step 17/36 : RUN chmod 755 /usr/local/bin/nemoclaw-start
+  Step 18/36 : ARG NEMOCLAW_MODEL=nemotron-3-super:120b
+  Step 19/36 : ARG NEMOCLAW_PROVIDER_KEY=inference
+  Step 20/36 : ARG NEMOCLAW_PRIMARY_MODEL_REF=inference/nemotron-3-super:120b
+  Step 21/36 : ARG CHAT_UI_URL=http://127.0.0.1:18789
+  Step 22/36 : ARG NEMOCLAW_INFERENCE_BASE_URL=https://inference.local/v1
+  Step 23/36 : ARG NEMOCLAW_INFERENCE_API=openai-responses
+  Step 24/36 : ARG NEMOCLAW_INFERENCE_COMPAT_B64=e30=
+  Step 25/36 : ARG NEMOCLAW_DISABLE_DEVICE_AUTH=1
+  Step 26/36 : ARG NEMOCLAW_BUILD_ID=1775719950798
+  Step 27/36 : ENV NEMOCLAW_MODEL=${NEMOCLAW_MODEL}     NEMOCLAW_PROVIDER_KEY=${NEMOCLAW_PROVIDER_KEY}     NEMOCLAW_PRIMARY_MODEL_REF=${NEMOCLAW_PRIMARY_MODEL_REF}     CHAT_UI_URL=${CHAT_UI_URL}     NEMOCLAW_INFERENCE_BASE_URL=${NEMOCLAW_INFERENCE_BASE_URL}     NEMOCLAW_INFERENCE_API=${NEMOCLAW_INFERENCE_API}     NEMOCLAW_INFERENCE_COMPAT_B64=${NEMOCLAW_INFERENCE_COMPAT_B64}     NEMOCLAW_DISABLE_DEVICE_AUTH=${NEMOCLAW_DISABLE_DEVICE_AUTH}
+  Step 28/36 : WORKDIR /sandbox
+  Step 29/36 : USER sandbox
+  Step 30/36 : RUN python3 -c "import base64, json, os, secrets; from urllib.parse import urlparse; model = os.environ['NEMOCLAW_MODEL']; chat_ui_url = os.environ['CHAT_UI_URL']; provider_key = os.environ['NEMOCLAW_PROVIDER_KEY']; primary_model_ref = os.environ['NEMOCLAW_PRIMARY_MODEL_REF']; inference_base_url = os.environ['NEMOCLAW_INFERENCE_BASE_URL']; inference_api = os.environ['NEMOCLAW_INFERENCE_API']; inference_compat = json.loads(base64.b64decode(os.environ['NEMOCLAW_INFERENCE_COMPAT_B64']).decode('utf-8')); parsed = urlparse(chat_ui_url); chat_origin = f'{parsed.scheme}://{parsed.netloc}' if parsed.scheme and parsed.netloc else 'http://127.0.0.1:18789'; origins = ['http://127.0.0.1:18789']; origins = list(dict.fromkeys(origins + [chat_origin])); disable_device_auth = os.environ.get('NEMOCLAW_DISABLE_DEVICE_AUTH', '') == '1'; allow_insecure = parsed.scheme == 'http'; providers = {     provider_key: {         'baseUrl': inference_base_url,         'apiKey': 'unused',         'api': inference_api,         'models': [{**({'compat': inference_compat} if inference_compat else {}), 'id': model, 'name': primary_model_ref, 'reasoning': False, 'input': ['text'], 'cost': {'input': 0, 'output': 0, 'cacheRead': 0, 'cacheWrite': 0}, 'contextWindow': 131072, 'maxTokens': 4096}]     } }; config = {     'agents': {'defaults': {'model': {'primary': primary_model_ref}}},     'models': {'mode': 'merge', 'providers': providers},     'channels': {'defaults': {'configWrites': False}},     'gateway': {         'mode': 'local',         'controlUi': {             'allowInsecureAuth': allow_insecure,             'dangerouslyDisableDeviceAuth': disable_device_auth,             'allowedOrigins': origins,         },         'trustedProxies': ['127.0.0.1', '::1'],         'auth': {'token': secrets.token_hex(32)}     } }; path = os.path.expanduser('~/.openclaw/openclaw.json'); json.dump(config, open(path, 'w'), indent=2); os.chmod(path, 0o600)"
+  Step 31/36 : RUN openclaw doctor --fix > /dev/null 2>&1 || true     && openclaw plugins install /opt/nemoclaw > /dev/null 2>&1 || true
+  Step 32/36 : USER root
+  Step 33/36 : RUN chown root:root /sandbox/.openclaw     && find /sandbox/.openclaw -mindepth 1 -maxdepth 1 -exec chown -h root:root {} +     && chmod 755 /sandbox/.openclaw     && chmod 444 /sandbox/.openclaw/openclaw.json
+  Step 34/36 : RUN sha256sum /sandbox/.openclaw/openclaw.json > /sandbox/.openclaw/.config-hash     && chmod 444 /sandbox/.openclaw/.config-hash     && chown root:root /sandbox/.openclaw/.config-hash
+  Step 35/36 : ENTRYPOINT ["/usr/local/bin/nemoclaw-start"]
+  Step 36/36 : CMD ["/bin/bash"]
+  Built image openshell/sandbox-from:1775719950
+  Uploading image into OpenShell gateway...
+  Pushing image openshell/sandbox-from:1775719950 into gateway "nemoclaw"
+  [progress] Exported 100 MiB
+  [progress] Exported 200 MiB
+  [progress] Exported 300 MiB
+  [progress] Exported 400 MiB
+  [progress] Exported 500 MiB
+  [progress] Exported 600 MiB
+  [progress] Exported 700 MiB
+  [progress] Exported 800 MiB
+  [progress] Exported 900 MiB
+  [progress] Exported 1000 MiB
+  [progress] Exported 1100 MiB
+  [progress] Exported 1200 MiB
+  [progress] Exported 1300 MiB
+  [progress] Exported 1303 MiB
+  [progress] Uploaded to gateway
+  Image openshell/sandbox-from:1775719950 is available in the gateway.
+  Waiting for sandbox to become ready...
+  Sandbox reported Ready before create stream exited; continuing.
+  Waiting for sandbox to become ready...
+  Waiting for NemoClaw dashboard to become ready...
+  Dashboard taking longer than expected to start. Continuing...
+[33m![39m No active forward found for port 18789
+  Setting up sandbox DNS proxy...
+Setting up DNS proxy in pod 'my-assistant' (10.200.0.1:53 -> 10.42.0.3)...
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+Defaulted container "agent" out of: agent, workspace-init (init)
+  [PASS] DNS forwarder running (pid=564): dns-proxy: 10.200.0.1:53 -> 10.42.0.3:53 pid=564
+  [PASS] resolv.conf -> nameserver 10.200.0.1
+  [PASS] iptables: UDP 10.200.0.1:53 ACCEPT rule present
+  [FAIL] getent hosts github.com returned empty (DNS not resolving)
+  DNS verification: 3 passed, 1 failed
+WARNING: DNS setup incomplete. Sandbox DNS resolution may not work. See issue #626.
+  ✓ Sandbox 'my-assistant' created
+
+  [6/7] Setting up OpenClaw inside sandbox
+  ──────────────────────────────────────────────────
+  ✓ OpenClaw gateway launched inside sandbox
+
+  [7/7] Policy presets
+  ──────────────────────────────────────────────────
+
+  Available policy presets:
+    ○ discord — Discord API, gateway, and CDN access
+    ○ docker — Docker Hub and NVIDIA container registry access
+    ○ huggingface — Hugging Face Hub, LFS, and Inference API access
+    ○ jira — Jira and Atlassian Cloud access
+    ○ npm — npm and Yarn registry access (suggested)
+    ○ outlook — Microsoft Outlook and Graph API access
+    ○ pypi — Python Package Index (PyPI) access (suggested)
+    ○ slack — Slack API, Socket Mode, and webhooks access
+    ○ telegram — Telegram Bot API access (suggested)
+
+[1G[0J  Apply suggested presets (pypi, npm, telegram)? [Y/n/list]: [62GY
+[1m[32m✓[39m[0m Policy version 2 submitted (hash: 301e5bfc7311)
+[1m[32m✓[39m[0m Policy version 2 loaded (active version: 2)
+  Applied preset: pypi
+[1m[32m✓[39m[0m Policy version 3 submitted (hash: 6f121876784a)
+[1m[32m✓[39m[0m Policy version 3 loaded (active version: 3)
+  Applied preset: npm
+[1m[32m✓[39m[0m Policy version 4 submitted (hash: f99716a3c23a)
+[1m[32m✓[39m[0m Policy version 4 loaded (active version: 4)
+  Applied preset: telegram
+
+  ──────────────────────────────────────────────────
+  Sandbox      my-assistant (Landlock + seccomp + netns)
+  Model        nemotron-3-super:120b (Local Ollama)
+  NIM          not running
+  ──────────────────────────────────────────────────
+  Run:         nemoclaw my-assistant connect
+  Status:      nemoclaw my-assistant status
+  Logs:        nemoclaw my-assistant logs --follow
+
+  OpenClaw UI (tokenized URL; treat it like a password)
+  Port 18789 must be forwarded before opening this URL.
+  http://127.0.0.1:18789/#token=7839f9775f1ad89df5d4d10a08402efee41bc25640555184bcd5f378135fe740
+  ──────────────────────────────────────────────────
+
+  [0;32m✓[0m Dashboard token updated: /home/democenter/.nemoclaw/dashboard-token.txt
+  [0;32m✓[0m Sandbox policy hardened and sandbox recreated
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 8 — Reboot survival
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m nemoclaw-sandbox.service enabled (will start after reboot)
+  [0;32m✓[0m OpenShell container restart policy set to unless-stopped
+  [0;32m✓[0m Reboot survival configured
+
+[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Phase 9 — Quick verification
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [0;32m✓[0m Docker NVIDIA runtime
+  [0;32m✓[0m Ollama responding
+  [0;32m✓[0m Model present
+  [0;32m✓[0m UFW active
+  [0;32m✓[0m Sandbox service enabled
+[1;34m[hardclaw][0m Quick verify: 5 passed, 0 failed
