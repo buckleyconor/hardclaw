@@ -27,9 +27,7 @@ Environment variables (all optional):
   HARDCLAW_MODEL          Model to pull (default: nemotron-3-super:120b)
 
 
-==================================
-  INSTALL.SH — PHASE WALKTHROUGH
-==================================
+==== INSTALL.SH — PHASE WALKTHROUGH ====
 
 ---- Phase 0: Preflight Checks ----
 
@@ -237,9 +235,7 @@ WHAT: Prints the dashboard URL, SSH tunnel command, and daily operation
       commands. Saves the same summary to ~/.nemoclaw/install-summary.txt.
 
 
-====================================
-  VERIFY.SH — LAYER-BY-LAYER CHECKS
-====================================
+===== VERIFY.SH — LAYER-BY-LAYER CHECKS =====
 
 Run after install or after any reboot to confirm the full stack is healthy.
 Exit code 1 if any check fails; 0 if all pass (warnings are non-fatal).
@@ -294,9 +290,7 @@ WHY:  Confirms the UI is available for SSH-tunnel access and reminds you of
       the URL.
 
 
-===============================
-  SHUTDOWN.SH — CLEAN TEARDOWN
-===============================
+==== SHUTDOWN.SH — CLEAN TEARDOWN ====
 
 Stops the stack in reverse dependency order. State is preserved — run
 'sudo systemctl start nemoclaw-sandbox' or rerun install.sh to bring
@@ -330,9 +324,7 @@ WHY:  The GB10 has 128 GB total unified memory. Releasing the model frees it for
       to remain available while the NemoClaw stack is down (e.g., for testing).
 
 
-====================
-  SECURITY NOTES
-====================
+==== SECURITY NOTES ====
 
 - Never expose port 18789 (dashboard) directly to the network. Always use an
   SSH tunnel: ssh -L 18789:127.0.0.1:18789 user@<gb10-ip>
@@ -351,4 +343,4 @@ WHY:  The GB10 has 128 GB total unified memory. Releasing the model frees it for
   to confirm the deny-all network policy is actually enforced.
 
 
-===================
+================
